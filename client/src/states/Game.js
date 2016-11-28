@@ -5,15 +5,17 @@ import {
 } from '../utils';
 
 export default class extends Phaser.State {
-    init() {}
+    init() {
+        this.game.input.keyboard.onDownCallback = null;
+    }
     preload() {}
 
     create() {
-        let banner = this.add.text(this.game.world.centerX, this.game.height - 30, 'Phaser + ES6 + Webpack');
-        banner.font = 'Nunito';
-        banner.fontSize = 40;
-        banner.fill = '#77BFA3';
-        banner.anchor.setTo(0.5);
+        // let banner = this.add.text(this.game.world.centerX, this.game.height - 30, 'Phaser + ES6 + Webpack');
+        // banner.font = 'Nunito';
+        // banner.fontSize = 20;
+        // banner.fill = '#77BFA3';
+        // banner.anchor.setTo(0.5);
 
         this.mushroom = new Mushroom({
             game: this.game,
@@ -30,7 +32,7 @@ export default class extends Phaser.State {
 
     render() {
         if (__DEV__) {
-            this.game.debug.spriteInfo(this.mushroom, 32, 32);
+            this.game.debug.spriteInfo(this.mushroom, 32, 32, 'green');
         }
     }
 }

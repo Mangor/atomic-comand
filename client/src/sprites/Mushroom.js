@@ -16,8 +16,8 @@ export default class extends Phaser.Sprite {
     }
 
     update() {
-        this.angle += 1;
-        this._angle += Math.PI / 64;
-        this.x = this.game.world.centerX + 150 * Math.abs(Math.cos(this._angle));
+        // this.angle += 1;
+        // this._angle += Math.PI / 64;
+        // this.x = this.game.world.centerX + 150 * Math.abs(Math.cos(this._angle));
     }
 }

@@ -1,8 +1,10 @@
 var path = require('path');
+var nib = require('nib');
 var webpack = require('webpack');
 //var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Phaser webpack config
 var phaserModule = path.join(__dirname, '/node_modules/phaser/');
@@ -28,8 +30,14 @@ module.exports = {
     plugins: [
         new webpack.NoErrorsPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new HtmlWebpackPlugin(),
-        new CopyWebpackPlugin([{from: 'src/assets', to: 'assets'}]),
+        new HtmlWebpackPlugin({
+            template: 'src/index.pug'
+        }),
+        new ExtractTextPlugin('assets/styles/main.css'),
+        new CopyWebpackPlugin([
+            {from: 'src/assets/img', to: 'assets/img'},
+            {from: 'src/assets/shaders', to: 'assets/shaders'},
+        ]),
         new webpack.DefinePlugin({
             __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
         })
@@ -76,7 +84,22 @@ module.exports = {
         }, {
             test: /p2\.js/,
             loader: 'expose?p2'
+        }, {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        }, {
+            test: /\.styl$/,
+            exculde: /node_modules/,
+            loader: ExtractTextPlugin.extract('css-loader!stylus-loader')
+        }, {
+            include: /\.pug/,
+            // pass options to pug as a query ('pug-html-loader?pretty')
+            loader: 'pug-html-loader'
         }]
+    },
+    stylus: {
+        use: [nib()],
+        import: ['~nib/lib/nib/index.styl']
     },
     node: {
         fs: 'empty'

@@ -6,13 +6,18 @@ import BootState from './states/Boot';
 import SplashState from './states/Splash';
 import GameState from './states/Game';
 
+import './assets/styles/app.styl';
+import './index.pug';
+
 class Game extends Phaser.Game {
 
     constructor() {
-        let width = document.documentElement.clientWidth > 768 ? 768 : document.documentElement.clientWidth;
-        let height = document.documentElement.clientHeight > 1024 ? 1024 : document.documentElement.clientHeight;
+        // let width = document.documentElement.clientWidth > 768 ? 768 : document.documentElement.clientWidth;
+        // let height = document.documentElement.clientHeight > 1024 ? 1024 : document.documentElement.clientHeight;
+        let width = 700;
+        let height = 525;
 
-        super(width, height, Phaser.AUTO, 'content', null);
+        super(width, height, Phaser.AUTO, 'game-screen', null);
 
         this.state.add('Boot', BootState, false);
         this.state.add('Splash', SplashState, false);
