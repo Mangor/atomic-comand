@@ -33,6 +33,6 @@
     "webfontloader": "^1.6.26",
     "webpack": "^1.13.2",
     "webpack-bundle-tracker": "0.0.93",
-    "webpack-dev-server": "1.16.1"
+    "webpack-dev-server": "3.1.11"
   }
 }
